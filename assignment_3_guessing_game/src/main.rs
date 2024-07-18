@@ -14,6 +14,8 @@ fn main() {
     let secret = 42; // Secret number
     let mut attempts = 0;
 
+    println!("Name: Jose F. Gonzalez Jr.");
+    
     loop {
         // Simulate user input
         print!("Enter your guess: ");
