@@ -1,0 +1,1 @@
+/workspaces/summber2024/assignment_2_number_analyzer/target/debug/assignment_2_number_analyzer: /workspaces/summber2024/assignment_2_number_analyzer/src/main.rs
