@@ -3,6 +3,7 @@ fn is_even(n: i32) -> bool {
 }
 
 fn main() {
+    println!("Name: Jose F. Gonzalez Jr.");
     let numbers = [12, 15, 22, 33, 45, 50, 65, 75, 82, 99];
 
     for &number in numbers.iter() {
@@ -19,6 +20,7 @@ fn main() {
         }
     }
 
+    
     // Use a while loop to find and print the sum of all numbers
     let mut sum = 0;
     let mut index = 0;
