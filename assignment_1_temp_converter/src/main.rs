@@ -9,6 +9,7 @@ fn celsius_to_fahrenheit(c: f64) -> f64{
 }
 
 fn main() {
+    println!("Name: Jose F. Gonzalez Jr.");
     let mut fahrenheit = 32.0;
 
     let celsius = fahrenheit_to_celsius(fahrenheit);
