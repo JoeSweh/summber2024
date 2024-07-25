@@ -3,11 +3,11 @@ use std::io::{self, Write};
 use std::process::Command;
 use std::thread;
 use std::sync::mpsc::{self, Sender, Receiver};
+use std::os::unix::process::ExitStatusExt; // Import the trait for Unix platforms
 
 struct CommandResult {
     command: String,
     output: String,
-    error: Option<String>,
 }
 
 fn main() {
@@ -58,11 +58,6 @@ fn main() {
     println!("\nCommand Execution Summary:");
     for result in results {
         println!("\nCommand: {}", result.command);
-        if let Some(error) = result.error {
-            println!("Error: {}", error);
-        } else {
-            println!("Output: {}", result.output);
-        }
     }
 }
 
@@ -73,7 +68,6 @@ fn execute_command(command: &str) -> CommandResult {
         return CommandResult {
             command: command.to_string(),
             output: String::from("Invalid command"),
-            error: Some("No command provided.".to_string()),
         };
     }
 
@@ -83,33 +77,19 @@ fn execute_command(command: &str) -> CommandResult {
     }
 
     // Execute the command and capture the output
-    let output = cmd.output();
-
-    match output {
-        Ok(output) => {
-            let stdout = String::from_utf8_lossy(&output.stdout).into_owned();
-            let stderr = String::from_utf8_lossy(&output.stderr).into_owned();
-
-            // If there is any standard error output, it's probably an issue with the command execution
-            if !stderr.is_empty() {
-                CommandResult {
-                    command: command.to_string(),
-                    output: stdout,
-                    error: Some("Command failed to execute.".to_string()), // Simplified error message
-                }
-            } else {
-                CommandResult {
-                    command: command.to_string(),
-                    output: stdout,
-                    error: None,
-                }
-            }
+    let output = cmd.output().unwrap_or_else(|_| {
+        std::process::Output {
+            stdout: Vec::new(),
+            stderr: Vec::new(),
+            status: std::process::ExitStatus::from_raw(0), // This requires the `ExitStatusExt` trait
         }
-        Err(_e) => CommandResult {
-            command: command.to_string(),
-            output: String::new(),
-            error: Some("Command not found".to_string()), // Simplified error message
-        },
+    });
+
+    let stdout = String::from_utf8_lossy(&output.stdout).into_owned();
+
+    CommandResult {
+        command: command.to_string(),
+        output: stdout,
     }
 }
 
@@ -127,14 +107,8 @@ fn save_results_to_file(results: &[CommandResult]) {
                 if let Err(e) = writeln!(file, "Command: {}", result.command) {
                     eprintln!("Couldn't write to file: {}", e);
                 }
-                if let Some(error) = &result.error {
-                    if let Err(e) = writeln!(file, "Error: {}", error) {
-                        eprintln!("Couldn't write to file: {}", e);
-                    }
-                } else {
-                    if let Err(e) = writeln!(file, "Output: {}", result.output) {
-                        eprintln!("Couldn't write to file: {}", e);
-                    }
+                if let Err(e) = writeln!(file, "Output: {}", result.output) {
+                    eprintln!("Couldn't write to file: {}", e);
                 }
             }
         }

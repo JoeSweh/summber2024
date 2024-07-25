@@ -42,3 +42,19 @@ Command: Hello
 Error: Command not found
 Command: World
 Error: Command not found
+Command: Hello
+Error: Command not found
+Command: World
+Error: Command not found
+Command: Hello
+Output: 
+Command: Wrold
+Output: 
+Command: Hello
+Output: 
+Command: World
+Output: 
+Command: Hello
+Output: 
+Command: World
+Output: 
