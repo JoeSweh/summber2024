@@ -1,0 +1,44 @@
+Command: Hello
+Error: No such file or directory (os error 2)
+Command: Everyone
+Error: No such file or directory (os error 2)
+Command: Just
+Error: No such file or directory (os error 2)
+Command: Wanted
+Error: No such file or directory (os error 2)
+Command: To
+Error: No such file or directory (os error 2)
+Command: Test
+Error: No such file or directory (os error 2)
+Command: This
+Error: No such file or directory (os error 2)
+Command: Hello
+Error: No such file or directory (os error 2)
+Command: World
+Error: No such file or directory (os error 2)
+Command: enst
+Error: No such file or directory (os error 2)
+Command: Hello
+Error: No such file or directory (os error 2)
+Command: World
+Error: No such file or directory (os error 2)
+Command: Hello
+Error: Command not found or failed to execute: No such file or directory (os error 2)
+Command: World
+Error: Command not found or failed to execute: No such file or directory (os error 2)
+Command: Hello
+Error: Command not found.
+Command: World
+Error: Command not found.
+Command: Hello
+Error: Command not found.
+Command: World
+Error: Command not found.
+Command: Hello
+Error: 
+Command: World
+Error: 
+Command: Hello
+Error: Command not found
+Command: World
+Error: Command not found
