@@ -20,5 +20,4 @@ fn main() {
         let celsius = fahrenheit_to_celsius(fahrenheit);
         println!("{}°F is {:.2}°C", fahrenheit, celsius);
     }
-
 }
